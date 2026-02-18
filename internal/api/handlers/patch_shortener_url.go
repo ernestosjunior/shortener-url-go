@@ -10,9 +10,8 @@ import (
 	"strconv"
 	"time"
 
-	"github.com/ernestosjunior/shortener-url-go/internal/database"
-
 	"github.com/ernestosjunior/shortener-url-go/internal/api/utils"
+	store_mysql "github.com/ernestosjunior/shortener-url-go/internal/store/mysql"
 
 	"github.com/go-chi/chi/v5"
 )
@@ -58,9 +57,9 @@ func PatchShortenerURL(db *sql.DB) http.HandlerFunc {
 		idStr := chi.URLParam(r, "id")
 		id, _ := strconv.ParseInt(idStr, 10, 64)
 
-		queries := database.New(db)
+		queries := store_mysql.New(db)
 
-		err := queries.UpdateShortURL(ctx, database.UpdateShortURLParams{Url: body.Url, ID: uint64(id)})
+		err := queries.UpdateShortURL(ctx, store_mysql.UpdateShortURLParams{Url: body.Url, ID: uint64(id)})
 		if err != nil {
 			log.Info("erro ao atualizar URL", "url", body.Url, "err", err)
 			utils.SendJSON(w, utils.ResponseJSON{Error: "Erro ao atualizar os dados"}, http.StatusBadRequest)

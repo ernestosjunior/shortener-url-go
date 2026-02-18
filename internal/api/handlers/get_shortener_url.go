@@ -9,8 +9,7 @@ import (
 	"time"
 
 	"github.com/ernestosjunior/shortener-url-go/internal/store"
-
-	"github.com/ernestosjunior/shortener-url-go/internal/database"
+	store_mysql "github.com/ernestosjunior/shortener-url-go/internal/store/mysql"
 
 	"github.com/go-chi/chi/v5"
 )
@@ -34,7 +33,7 @@ func GetShortenerURL(db *sql.DB, s store.Store) http.HandlerFunc {
 			log.Info("redirect via cache", "code", code, "to", urlCache)
 			http.Redirect(w, r, urlCache, http.StatusPermanentRedirect)
 		} else {
-			queries := database.New(db)
+			queries := store_mysql.New(db)
 
 			url, err := queries.GetShortURL(ctx, code)
 

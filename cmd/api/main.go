@@ -33,7 +33,7 @@ func run() error {
 		return err
 	}
 
-	if err := goose.Up(db, "./internal/database/migrations"); err != nil {
+	if err := goose.Up(db, "./internal/store/mysql/migrations"); err != nil {
 		slog.Error("erro ao executar migrações no DB", "err", err)
 	}
 

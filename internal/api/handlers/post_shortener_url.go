@@ -11,8 +11,7 @@ import (
 	"time"
 
 	"github.com/ernestosjunior/shortener-url-go/internal/store"
-
-	"github.com/ernestosjunior/shortener-url-go/internal/database"
+	store_mysql "github.com/ernestosjunior/shortener-url-go/internal/store/mysql"
 
 	"github.com/ernestosjunior/shortener-url-go/internal/api/utils"
 
@@ -60,10 +59,10 @@ func PostShortenerURL(db *sql.DB, s store.Store) http.HandlerFunc {
 		const maxAttempts = 3
 		code := utils.GenCode()
 
-		queries := database.New(db)
+		queries := store_mysql.New(db)
 
 		for range maxAttempts {
-			res, err := queries.CreateShortURL(ctx, database.CreateShortURLParams{Code: code, Url: body.Url})
+			res, err := queries.CreateShortURL(ctx, store_mysql.CreateShortURLParams{Code: code, Url: body.Url})
 
 			if err == nil {
 				log.Info("url encurtada criada", "code", code, "url", body.Url)

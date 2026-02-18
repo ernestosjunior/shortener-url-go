@@ -1,9 +1,9 @@
 version: "2"
 sql:
   - engine: "mysql"
-    queries: "./internal/database/query.sql"
-    schema: "./internal/database/migrations"
+    queries: "./internal/store/mysql/query.sql"
+    schema: "./internal/store/mysql/migrations"
     gen:
       go:
-        package: "database"
-        out: "./internal/database"
+        package: "store_mysql"
+        out: "./internal/store/mysql"

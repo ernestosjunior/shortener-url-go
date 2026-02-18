@@ -9,8 +9,7 @@ import (
 	"time"
 
 	"github.com/ernestosjunior/shortener-url-go/internal/store"
-
-	"github.com/ernestosjunior/shortener-url-go/internal/database"
+	store_mysql "github.com/ernestosjunior/shortener-url-go/internal/store/mysql"
 
 	"github.com/ernestosjunior/shortener-url-go/internal/api/utils"
 
@@ -25,7 +24,7 @@ func DeleteShortenerURL(db *sql.DB, s store.Store) http.HandlerFunc {
 		idStr := chi.URLParam(r, "id")
 		id, _ := strconv.ParseInt(idStr, 10, 64)
 
-		queries := database.New(db)
+		queries := store_mysql.New(db)
 
 		if err := queries.DeleteShortURL(ctx, uint64(id)); err != nil {
 			slog.Error("erro ao deletar o link", "err", err)
