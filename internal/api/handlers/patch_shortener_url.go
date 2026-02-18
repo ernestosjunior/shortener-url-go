@@ -9,8 +9,10 @@ import (
 	"net/url"
 	"strconv"
 	"time"
-	"url-shortener/internal/api/utils"
-	"url-shortener/internal/database"
+
+	"github.com/ernestosjunior/shortener-url-go/internal/database"
+
+	"github.com/ernestosjunior/shortener-url-go/internal/api/utils"
 
 	"github.com/go-chi/chi/v5"
 )

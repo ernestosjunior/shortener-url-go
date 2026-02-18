@@ -7,8 +7,10 @@ import (
 	"log/slog"
 	"net/http"
 	"time"
-	"url-shortener/internal/database"
-	"url-shortener/internal/store"
+
+	"github.com/ernestosjunior/shortener-url-go/internal/store"
+
+	"github.com/ernestosjunior/shortener-url-go/internal/database"
 
 	"github.com/go-chi/chi/v5"
 )

@@ -6,8 +6,10 @@ import (
 	"net/http"
 	"os"
 	"time"
-	"url-shortener/internal/api"
-	"url-shortener/internal/store"
+
+	"github.com/ernestosjunior/shortener-url-go/internal/store"
+
+	"github.com/ernestosjunior/shortener-url-go/internal/api"
 
 	_ "github.com/go-sql-driver/mysql"
 	"github.com/pressly/goose/v3"

@@ -7,9 +7,12 @@ import (
 	"net/http"
 	"strconv"
 	"time"
-	"url-shortener/internal/api/utils"
-	"url-shortener/internal/database"
-	"url-shortener/internal/store"
+
+	"github.com/ernestosjunior/shortener-url-go/internal/store"
+
+	"github.com/ernestosjunior/shortener-url-go/internal/database"
+
+	"github.com/ernestosjunior/shortener-url-go/internal/api/utils"
 
 	"github.com/go-chi/chi/v5"
 )

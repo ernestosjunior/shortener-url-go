@@ -3,8 +3,10 @@ package api
 import (
 	"database/sql"
 	"net/http"
-	"url-shortener/internal/api/handlers"
-	"url-shortener/internal/store"
+
+	"github.com/ernestosjunior/shortener-url-go/internal/store"
+
+	"github.com/ernestosjunior/shortener-url-go/internal/api/handlers"
 
 	"github.com/go-chi/chi/v5"
 	"github.com/go-chi/chi/v5/middleware"
