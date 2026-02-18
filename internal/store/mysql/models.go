@@ -9,9 +9,9 @@ import (
 )
 
 type ShortUrl struct {
-	ID        uint64
-	Code      string
-	Url       string
-	Clicks    uint64
-	CreatedAt time.Time
+	ID        uint64    `json:"id"`
+	Code      string    `json:"code"`
+	Url       string    `json:"url"`
+	Clicks    uint64    `json:"clicks"`
+	CreatedAt time.Time `json:"created_at"`
 }

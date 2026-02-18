@@ -19,7 +19,7 @@ import (
 )
 
 type postBody struct {
-	Url string `json:"url"`
+	URL string `json:"url"`
 }
 
 type postResponse struct {
@@ -50,8 +50,8 @@ func PostShortenerURL(db *sql.DB, s store.Store) http.HandlerFunc {
 			return
 		}
 
-		if _, err := url.Parse(body.Url); err != nil {
-			log.Info("url inválida", "url", body.Url, "err", err)
+		if _, err := url.Parse(body.URL); err != nil {
+			log.Info("url inválida", "url", body.URL, "err", err)
 			utils.SendJSON(w, utils.ResponseJSON{Error: "URL inválida"}, http.StatusBadRequest)
 			return
 		}
@@ -62,12 +62,12 @@ func PostShortenerURL(db *sql.DB, s store.Store) http.HandlerFunc {
 		queries := store_mysql.New(db)
 
 		for range maxAttempts {
-			res, err := queries.CreateShortURL(ctx, store_mysql.CreateShortURLParams{Code: code, Url: body.Url})
+			res, err := queries.CreateShortURL(ctx, store_mysql.CreateShortURLParams{Code: code, Url: body.URL})
 
 			if err == nil {
-				log.Info("url encurtada criada", "code", code, "url", body.Url)
+				log.Info("url encurtada criada", "code", code, "url", body.URL)
 
-				s.SetShortURLCache(ctx, code, body.Url)
+				s.SetShortURLCache(ctx, code, body.URL)
 
 				id, err := res.LastInsertId()
 				if err != nil {
@@ -96,7 +96,7 @@ func PostShortenerURL(db *sql.DB, s store.Store) http.HandlerFunc {
 			return
 		}
 
-		log.Error("falha ao gerar code único", "url", body.Url)
+		log.Error("falha ao gerar code único", "url", body.URL)
 		utils.SendJSON(w, utils.ResponseJSON{Error: "Não foi possível gerar o código. Tente novamente."}, http.StatusInternalServerError)
 	}
 }

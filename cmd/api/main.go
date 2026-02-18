@@ -8,6 +8,7 @@ import (
 	"time"
 
 	"github.com/ernestosjunior/shortener-url-go/internal/store"
+	"github.com/joho/godotenv"
 
 	"github.com/ernestosjunior/shortener-url-go/internal/api"
 
@@ -28,6 +29,10 @@ func main() {
 }
 
 func run() error {
+	if err := godotenv.Load(); err != nil {
+		return err
+	}
+
 	db, err := openDB()
 	if err != nil {
 		return err

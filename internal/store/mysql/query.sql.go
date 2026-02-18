@@ -19,8 +19,8 @@ INSERT INTO short_urls (
 `
 
 type CreateShortURLParams struct {
-	Code string
-	Url  string
+	Code string `json:"code"`
+	Url  string `json:"url"`
 }
 
 func (q *Queries) CreateShortURL(ctx context.Context, arg CreateShortURLParams) (sql.Result, error) {
@@ -43,8 +43,8 @@ WHERE code = ? LIMIT 1
 `
 
 type GetShortURLRow struct {
-	ID  uint64
-	Url string
+	ID  uint64 `json:"id"`
+	Url string `json:"url"`
 }
 
 func (q *Queries) GetShortURL(ctx context.Context, code string) (GetShortURLRow, error) {
@@ -60,9 +60,9 @@ WHERE id = ? LIMIT 1
 `
 
 type GetShortURLByIdRow struct {
-	ID   uint64
-	Code string
-	Url  string
+	ID   uint64 `json:"id"`
+	Code string `json:"code"`
+	Url  string `json:"url"`
 }
 
 func (q *Queries) GetShortURLById(ctx context.Context, id uint64) (GetShortURLByIdRow, error) {
@@ -79,8 +79,8 @@ WHERE id = ?
 `
 
 type UpdateShortURLParams struct {
-	Url string
-	ID  uint64
+	Url string `json:"url"`
+	ID  uint64 `json:"id"`
 }
 
 func (q *Queries) UpdateShortURL(ctx context.Context, arg UpdateShortURLParams) error {

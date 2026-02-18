@@ -17,7 +17,7 @@ import (
 )
 
 type patchBody struct {
-	Url string `json:"url"`
+	URL string `json:"url"`
 }
 
 type patchResponse struct {
@@ -48,8 +48,8 @@ func PatchShortenerURL(db *sql.DB) http.HandlerFunc {
 			return
 		}
 
-		if _, err := url.Parse(body.Url); err != nil {
-			log.Info("url inválida", "url", body.Url, "err", err)
+		if _, err := url.Parse(body.URL); err != nil {
+			log.Info("url inválida", "url", body.URL, "err", err)
 			utils.SendJSON(w, utils.ResponseJSON{Error: "URL inválida"}, http.StatusBadRequest)
 			return
 		}
@@ -59,16 +59,16 @@ func PatchShortenerURL(db *sql.DB) http.HandlerFunc {
 
 		queries := store_mysql.New(db)
 
-		err := queries.UpdateShortURL(ctx, store_mysql.UpdateShortURLParams{Url: body.Url, ID: uint64(id)})
+		err := queries.UpdateShortURL(ctx, store_mysql.UpdateShortURLParams{Url: body.URL, ID: uint64(id)})
 		if err != nil {
-			log.Info("erro ao atualizar URL", "url", body.Url, "err", err)
+			log.Info("erro ao atualizar URL", "url", body.URL, "err", err)
 			utils.SendJSON(w, utils.ResponseJSON{Error: "Erro ao atualizar os dados"}, http.StatusBadRequest)
 			return
 		}
 
 		utils.SendJSON(w, utils.ResponseJSON{Data: patchResponse{
 			ID:  id,
-			URL: body.Url,
+			URL: body.URL,
 		}}, http.StatusCreated)
 	}
 }
